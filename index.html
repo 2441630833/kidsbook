@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>KidsBook 3D - 彼得兔的花园奇遇记 (3D儿童故事绘本)</title>
+  <meta name="description" content="复刻Amazon高人气触感儿童绘本体验：基于Blender 3D立体微缩场景打造的公有领域经典《彼得兔的故事》，支持中英双语、自然语音朗读与睡前陪伴模式。">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐰</text></svg>">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- 3D WebGL Canvas Layer -->
+    <div id="canvas-container"></div>
+
+    <!-- Floating Top Header -->
+    <header id="header-bar">
+      <div class="brand-badge">
+        <span class="brand-icon">🐰</span>
+        <span class="brand-title">KidsBook 3D</span>
+      </div>
+
+      <div class="header-actions">
+        <button id="btn-library" class="btn-pill" title="经典公有领域绘本书架">
+          <span>📖</span> <span>书架</span>
+        </button>
+        <button id="btn-lang" class="btn-pill" title="切换中英双语">
+          <span>🌐</span> <span>EN / 中文</span>
+        </button>
+        <button id="btn-narrate" class="btn-pill" title="语音伴读朗读故事 (按空格键)">
+          <span>🔊</span> <span>伴读</span>
+        </button>
+        <button id="btn-bedtime" class="btn-pill" title="晚安助眠模式 & 柔和摇篮曲">
+          <span>🌙</span> <span>晚安</span>
+        </button>
+        <button id="btn-sound" class="btn-pill btn-icon-only" title="音效开关">
+          <span>🎵</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Interactive Hint Floating Pill -->
+    <div id="orbit-hint">
+      ✨ 360°滑动旋转立体场景 · 点击画面物体触发趣味互动
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button id="btn-prev" class="nav-arrow" aria-label="上一页" disabled>❮</button>
+    <button id="btn-next" class="nav-arrow" aria-label="下一页">❯</button>
+
+    <!-- Bottom Story Reader Card -->
+    <main id="reader-card">
+      <div class="reader-header">
+        <div class="chapter-heading">
+          <h1 id="chapter-title">第一章：巨型冷杉树下的温馨家</h1>
+          <span id="chapter-subtitle">粗大树根下的安睡之所</span>
+        </div>
+        <nav id="chapter-dots" aria-label="章节分页"></nav>
+      </div>
+
+      <!-- Story Narrative Content -->
+      <article id="story-text" aria-live="polite">
+        加载精彩故事中...
+      </article>
+
+      <!-- Interactive Clues Section -->
+      <div class="interactive-section">
+        <span class="interactive-title">探索彩蛋:</span>
+        <div id="interactive-pills"></div>
+      </div>
+    </main>
+
+    <!-- Library Modal Dialog -->
+    <div id="library-modal" class="modal-overlay" role="dialog" aria-modal="true">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2>📚 经典公有领域绘本馆</h2>
+          <button id="library-close" class="btn-close" aria-label="关闭">&times;</button>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted);">
+          本站严格遵守全球知识产权公约，精选已完全进入公有领域（Public Domain）的世界儿童文学名著，采用 Blender 3D 立体场景数字化重塑，无版权纠纷，安全无忧。
+        </p>
+        <div id="library-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Bootstrap -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
