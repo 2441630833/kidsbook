@@ -171,20 +171,38 @@ class KidsBookApp {
     this.currentChapterIndex = index;
     const chapter = CHAPTERS[index];
 
-    // Update 3D diorama
-    this.scene3d.loadChapter(chapter);
+    // 1. Show instant illustration backdrop & loading badge
+    const backdrop = document.getElementById("scene-backdrop");
+    const loader = document.getElementById("scene-loader");
+    const loaderStatus = document.getElementById("loader-status");
+    if (backdrop && chapter.preview) {
+      backdrop.style.backgroundImage = `url('${chapter.preview}')`;
+      backdrop.classList.remove("faded");
+    }
+    if (loader) {
+      if (loaderStatus) {
+        loaderStatus.textContent = this.currentLanguage === "cn" ? "正在翻开立体画卷..." : "Opening 3D pop-up page...";
+      }
+      loader.classList.remove("hidden");
+    }
 
-    // Update Text UI
+    // 2. Update 3D diorama
+    this.scene3d.loadChapter(chapter, () => {
+      if (loader) loader.classList.add("hidden");
+      if (backdrop) backdrop.classList.add("faded");
+    });
+
+    // 3. Update Text UI
     this.renderStoryText();
 
-    // Update Buttons & Dots
+    // 4. Update Buttons & Dots
     document.getElementById("btn-prev").disabled = index === 0;
     document.getElementById("btn-next").disabled = index === CHAPTERS.length - 1;
 
     const dots = document.querySelectorAll("#chapter-dots .dot");
     dots.forEach((d, i) => d.classList.toggle("active", i === index));
 
-    // Render interactive clues pill
+    // 5. Render interactive clues pill
     this.renderInteractivePills(chapter);
   }
 
@@ -292,8 +310,21 @@ class KidsBookApp {
   }
 }
 
-// Bootstrap on DOM load
-window.addEventListener("DOMContentLoaded", () => {
-  window.kidsBook = new KidsBookApp();
-  window.kidsBook.init();
-});
+// Safe Bootstrap on DOM load or immediate if already interactive
+function startApp() {
+  if (!window.kidsBook) {
+    try {
+      window.kidsBook = new KidsBookApp();
+      window.kidsBook.init();
+      console.log("KidsBook 3D successfully initialized!");
+    } catch (err) {
+      console.error("KidsBook 3D initialization error:", err);
+    }
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startApp);
+} else {
+  startApp();
+}

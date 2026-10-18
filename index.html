@@ -24,7 +24,13 @@
 <body>
   <div id="app-container">
     <!-- 3D WebGL Canvas Layer -->
-    <div id="canvas-container"></div>
+    <div id="canvas-container">
+      <div id="scene-backdrop" class="scene-backdrop"></div>
+      <div id="scene-loader" class="scene-loader">
+        <div class="loader-spinner">🐰</div>
+        <div class="loader-text" id="loader-status">正在翻开立体画卷...</div>
+      </div>
+    </div>
 
     <!-- Floating Top Header -->
     <header id="header-bar">

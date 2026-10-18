@@ -45,8 +45,7 @@ export class Storybook3DScene {
 
     // 1. Scene
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x241d1a);
-    this.scene.fog = new THREE.FogExp2(0x241d1a, 0.08);
+    this.scene.background = null; // Transparent so the storybook CSS parchment background displays cleanly
 
     // 2. Camera
     this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
@@ -151,7 +150,7 @@ export class Storybook3DScene {
   loadChapter(chapterData, onLoaded = null) {
     if (this.isTransitioning) return;
     this.isTransitioning = true;
-    sound.playPageTurn();
+    try { sound.playPageTurn(); } catch (e) {}
 
     const modelPath = chapterData.model;
     const doTransition = (newModelScene) => {
@@ -227,8 +226,11 @@ export class Storybook3DScene {
     const tick = () => {
       t += 0.035;
       const progress = Math.min(t / duration, 1.0);
-      // Spring elastic overshoot curve
-      const s = Math.sin(-13.0 * (progress + 1.0) * Math.PI / 2) * Math.pow(2.0, -10.0 * progress) + 1.0;
+      // Safe spring bounce curve (always strictly positive)
+      const p = progress - 1;
+      const c1 = 1.70158;
+      const c3 = c1 + 1;
+      const s = Math.max(0.001, 1 + c3 * Math.pow(p, 3) + c1 * Math.pow(p, 2));
       
       group.scale.set(s, s, s);
       group.position.y = startPos + (endPos - startPos) * progress;
@@ -316,16 +318,14 @@ export class Storybook3DScene {
     this.isBedtimeMode = isBedtime;
     if (isBedtime) {
       this.scene.background = new THREE.Color(0x0e111a);
-      this.scene.fog.color = new THREE.Color(0x0e111a);
-      this.ambientLight.intensity = 0.25;
-      this.sunLight.intensity = 0.4;
+      this.ambientLight.intensity = 0.35;
+      this.sunLight.intensity = 0.5;
       this.sunLight.color.setHex(0x5577bb);
       this.warmGlowLight.intensity = 4.0;
     } else {
-      this.scene.background = new THREE.Color(0x241d1a);
-      this.scene.fog.color = new THREE.Color(0x241d1a);
-      this.ambientLight.intensity = 0.65;
-      this.sunLight.intensity = 2.2;
+      this.scene.background = null;
+      this.ambientLight.intensity = 0.75;
+      this.sunLight.intensity = 2.4;
       this.sunLight.color.setHex(0xfffaed);
       this.warmGlowLight.intensity = 2.5;
     }
