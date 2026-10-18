@@ -58,7 +58,7 @@ export class Storybook3DScene {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.15;
+    this.renderer.toneMappingExposure = 1.0;
     this.container.appendChild(this.renderer.domElement);
 
     // 4. Orbit Controls (Tuned for kid-friendly interaction)
@@ -85,10 +85,10 @@ export class Storybook3DScene {
   }
 
   setupLighting() {
-    this.ambientLight = new THREE.AmbientLight(0xfff3e6, 0.65);
+    this.ambientLight = new THREE.AmbientLight(0xfff5ea, 0.55);
     this.scene.add(this.ambientLight);
 
-    this.sunLight = new THREE.DirectionalLight(0xfffaed, 2.2);
+    this.sunLight = new THREE.DirectionalLight(0xfffaee, 1.35);
     this.sunLight.position.set(4, 7, 5);
     this.sunLight.castShadow = true;
     this.sunLight.shadow.mapSize.width = 1024;
@@ -102,7 +102,7 @@ export class Storybook3DScene {
     this.sunLight.shadow.bias = -0.001;
     this.scene.add(this.sunLight);
 
-    this.warmGlowLight = new THREE.PointLight(0xffaa44, 2.5, 8);
+    this.warmGlowLight = new THREE.PointLight(0xffaa44, 1.2, 8);
     this.warmGlowLight.position.set(0, 1.2, 0);
     this.scene.add(this.warmGlowLight);
   }
@@ -191,6 +191,12 @@ export class Storybook3DScene {
       if (child.isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
+        if (child.material) {
+          if ('roughness' in child.material) {
+            child.material.roughness = Math.max(0.35, child.material.roughness);
+          }
+          child.material.needsUpdate = true;
+        }
         this.clickableMeshes.push(child);
       }
     });
@@ -209,11 +215,13 @@ export class Storybook3DScene {
       this.warmGlowLight.color.setHex(chapterData.lighting.warm_glow);
     }
 
+    // Notify loader to hide immediately as 3D diorama starts popping in
+    if (onLoaded) onLoaded();
+
     // Pop-in spring animation
     this.animatePopIn(this.currentChapterGroup, () => {
       this.isTransitioning = false;
       sound.playSparkle();
-      if (onLoaded) onLoaded();
     });
   }
 

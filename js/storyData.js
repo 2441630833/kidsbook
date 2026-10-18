@@ -29,8 +29,8 @@ export const CHAPTERS = [
     bg_gradient: "linear-gradient(135deg, #2c1e19 0%, #4a342a 50%, #211612 100%)",
     theme_color: "#b07d50",
     lighting: {
-      ambient: 0.45,
-      sun_intensity: 1.8,
+      ambient: 0.50,
+      sun_intensity: 1.25,
       sun_color: 0xffeedd,
       warm_glow: 0xffaa44
     },
@@ -54,8 +54,8 @@ export const CHAPTERS = [
     bg_gradient: "linear-gradient(135deg, #1f3821 0%, #3e6833 50%, #2a4c28 100%)",
     theme_color: "#e67329",
     lighting: {
-      ambient: 0.65,
-      sun_intensity: 2.8,
+      ambient: 0.55,
+      sun_intensity: 1.35,
       sun_color: 0xfffae8,
       warm_glow: 0x88cc44
     },
@@ -79,8 +79,8 @@ export const CHAPTERS = [
     bg_gradient: "linear-gradient(135deg, #2c3328 0%, #465538 50%, #20271c 100%)",
     theme_color: "#2a62a8",
     lighting: {
-      ambient: 0.55,
-      sun_intensity: 2.2,
+      ambient: 0.50,
+      sun_intensity: 1.25,
       sun_color: 0xffeed8,
       warm_glow: 0x4488ee
     },
@@ -104,8 +104,8 @@ export const CHAPTERS = [
     bg_gradient: "linear-gradient(135deg, #111424 0%, #1c223c 50%, #0d0f1c 100%)",
     theme_color: "#dca742",
     lighting: {
-      ambient: 0.4,
-      sun_intensity: 0.6,
+      ambient: 0.45,
+      sun_intensity: 0.75,
       sun_color: 0x7799cc,
       warm_glow: 0xffaa33
     },

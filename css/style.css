@@ -94,7 +94,8 @@ html, body {
 }
 
 .scene-backdrop.faded {
-  opacity: 0.12;
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Subtle Loading Badge */
