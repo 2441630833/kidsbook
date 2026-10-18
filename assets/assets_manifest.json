@@ -1,26 +1,26 @@
 {
   "peter_rabbit": {
     "path": "E:\\blender-mcp\\blender-mcp-animation\\blender-mcp-animation\\assets\\models\\peter_rabbit.glb",
-    "size_kb": 186.12109375
+    "size_kb": 2642.16015625
   },
   "storybook_master": {
     "path": "E:\\blender-mcp\\blender-mcp-animation\\blender-mcp-animation\\assets\\models\\storybook_master.glb",
-    "size_kb": 16.59765625
+    "size_kb": 16.55078125
   },
   "scene1_burrow": {
     "path": "E:\\blender-mcp\\blender-mcp-animation\\blender-mcp-animation\\assets\\models\\scene1_burrow.glb",
-    "size_kb": 397.2109375
+    "size_kb": 2857.1640625
   },
   "scene2_garden": {
     "path": "E:\\blender-mcp\\blender-mcp-animation\\blender-mcp-animation\\assets\\models\\scene2_garden.glb",
-    "size_kb": 430.171875
+    "size_kb": 2880.703125
   },
   "scene3_adventure": {
     "path": "E:\\blender-mcp\\blender-mcp-animation\\blender-mcp-animation\\assets\\models\\scene3_adventure.glb",
-    "size_kb": 352.8046875
+    "size_kb": 2804.15234375
   },
   "scene4_bedtime": {
     "path": "E:\\blender-mcp\\blender-mcp-animation\\blender-mcp-animation\\assets\\models\\scene4_bedtime.glb",
-    "size_kb": 310.07421875
+    "size_kb": 2669.4765625
   }
 }
